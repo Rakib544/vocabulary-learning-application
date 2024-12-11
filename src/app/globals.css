@@ -45,6 +45,10 @@
   }
 }
 
+.custom-shadow {
+  box-shadow: rgba(102, 102, 255, 0.08) 0px 6px 56px 0px;
+}
+
 .text-stroke {
   -webkit-text-stroke: 1px #4f46e5;
 }
@@ -54,42 +58,4 @@
   border-style: solid;
   /* Replace these colors with your desired gradient */
   border-image: linear-gradient(to right, #4dc0b5, #3490dc);
-}
-
-.apexcharts-canvas {
-  font-family: "Inter";
-}
-
-.apexcharts-tooltip {
-  backdrop-filter: blur(20px) !important;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: rgb(33, 43, 54);
-  box-shadow: rgba(145, 158, 171, 0.24) 0px 0px 2px 0px,
-    rgba(145, 158, 171, 0.24) -20px 20px 40px -4px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.apexcharts-tooltip.apexcharts-theme-light {
-  background: rgba(255, 255, 255, 0.6) !important;
-}
-
-.apexcharts-tooltip .apexcharts-tooltip-title {
-  font-weight: 700;
-  color: "#4b5563" !important;
-}
-
-.apexcharts-xaxistooltip,
-.apexcharts-yaxistooltip {
-  backdrop-filter: blur(6px);
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid #fff !important;
-  color: rgb(33, 43, 54);
-  box-shadow: rgba(145, 158, 171, 0.24) 0px 0px 2px 0px,
-    rgba(145, 158, 171, 0.24) -20px 20px 40px -4px;
-  border-radius: 10px !important;
-}
-
-.apexcharts-xaxistooltip-bottom:before {
-  border-bottom-color: transparent !important;
 }
