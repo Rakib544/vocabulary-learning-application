@@ -1,3 +1,5 @@
+import { Container } from "@/components/container";
+import Navbar from "@/components/navbar";
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
@@ -61,6 +63,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
       <body className={workSans.className} suppressHydrationWarning={true}>
+        <header className=" sticky top-0 w-full z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <Container>
+            <Navbar />
+          </Container>
+        </header>
         {children}
       </body>
     </html>
