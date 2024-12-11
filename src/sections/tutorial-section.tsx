@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -35,6 +36,23 @@ export default function TutorialSection({
         <h2 className="mt-4 font-bold text-xl">
           {tutorials[currentTutorial].title}
         </h2>
+        <div className="flex justify-end gap-x-2 mt-4">
+          <Button
+            variant="secondary"
+            size="lg"
+            disabled={currentTutorial === 0}
+            onClick={() => setCurrentTutorial((prev) => prev - 1)}
+          >
+            Previous
+          </Button>
+          <Button
+            size="lg"
+            disabled={currentTutorial === tutorials.length - 1}
+            onClick={() => setCurrentTutorial((prev) => prev + 1)}
+          >
+            Next
+          </Button>
+        </div>
       </div>
       <div className="col-span-12 lg:col-span-4">
         <ScrollArea className="h-[600px]">
