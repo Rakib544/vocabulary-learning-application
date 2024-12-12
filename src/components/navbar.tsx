@@ -27,9 +27,8 @@ export default function Navbar({
   const pathname = usePathname();
   const isAuthRoute = pathname.startsWith("/auth/");
   const isDashboardRoute = pathname.startsWith("/dashboard");
-  const isDocsRoute = pathname.startsWith("/docs");
 
-  const isNavHidden = isAuthRoute || isDashboardRoute || isDocsRoute;
+  const isNavHidden = isAuthRoute || isDashboardRoute;
 
   return (
     <NavigationMenu

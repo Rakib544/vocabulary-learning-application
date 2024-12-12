@@ -1,53 +1,38 @@
 import { Container } from "@/components/container";
 import { PageIntro } from "@/components/page-intro";
 import { Button } from "@/components/ui/button";
+import { authOptions } from "@/lib/auth";
 import { ChevronRight } from "lucide-react";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-const lessons = [
-  {
-    title: "Introduction to Greetings",
-    lessonNo: 1,
-  },
-  {
-    title: "Basic Numbers",
-    lessonNo: 2,
-  },
-  {
-    title: "Everyday Phrases",
-    lessonNo: 3,
-  },
-  {
-    title: "Introducing Yourself",
-    lessonNo: 4,
-  },
-  {
-    title: "Common Questions",
-    lessonNo: 5,
-  },
-  {
-    title: "Time and Dates",
-    lessonNo: 6,
-  },
-  {
-    title: "Shopping Vocabulary",
-    lessonNo: 7,
-  },
-  {
-    title: "Travel and Directions",
-    lessonNo: 8,
-  },
-  {
-    title: "Food and Dining",
-    lessonNo: 9,
-  },
-  {
-    title: "Basic Conversations",
-    lessonNo: 10,
-  },
-];
+type ResponseType = {
+  success: boolean;
+  message: string;
+  data: {
+    id: string;
+    name: string;
+    lessonNo: number;
+    totalVocabularies: number;
+  }[];
+};
 
 export default async function LessonsPage() {
+  const session = await getServerSession(authOptions);
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/lessons`,
+    {
+      headers: {
+        authorization: `Bearer ${session?.user.accessToken}`,
+      },
+    }
+  );
+
+  const result = (await response.json()) as ResponseType;
+
+  const lessons = result.data;
+
   return (
     <main>
       <Container>
@@ -71,7 +56,7 @@ export default async function LessonsPage() {
                     {lesson.lessonNo}
                   </span>
                   <h3 className="text-lg pt-2 pb-4 font-semibold">
-                    {lesson.title}
+                    {lesson.name}
                   </h3>
                   <Button variant="outline">
                     Start Lesson{" "}

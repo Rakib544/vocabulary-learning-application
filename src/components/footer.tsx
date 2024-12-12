@@ -1,9 +1,17 @@
+"use client";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Container } from "./container";
 
 export function Footer() {
+  const pathname = usePathname();
+  const isAuthRoute = pathname.startsWith("/auth/");
+  const isDashboardRoute = pathname.startsWith("/dashboard");
+
+  const isFooterAllowed = isAuthRoute || isDashboardRoute;
   return (
-    <footer>
+    <footer className={cn(isFooterAllowed ? "hidden" : "block")}>
       <Container>
         <div className="mt-24 w-full sm:mt-32 lg:mt-40 pb-10 flex flex-col md:flex-row justify-between space-y-4 text-center md:text-left">
           <ul className="flex items-center gap-x-6 justify-center md:justify-start">

@@ -71,7 +71,7 @@ export const authOptions: NextAuthOptions = {
 
       // Here I need to call refresh token api endpoint
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/auth/token/refresh`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/auth/refresh`,
         {
           method: "POST",
           headers: {

@@ -16,6 +16,14 @@ export default function VocabulariesSection({
   vocabularies: VocabulariesInterface[];
 }) {
   const [currentItem, setCurrentItem] = useState(0);
+
+  if (vocabularies.length === 0) {
+    return (
+      <div className="h-72 bg-primary/5 rounded-2xl flex items-center justify-center mt-20">
+        No vocabularies available
+      </div>
+    );
+  }
   return (
     <>
       <div className="mt-20 p-20 rounded-2xl bg-primary/5 relative">

@@ -79,7 +79,7 @@ export default async function RootLayout({
               />
             </Container>
           </header>
-          {children}
+          <div className="min-h-[70vh]">{children}</div>
           <Footer />
           <Toaster />
         </NextAuthProvider>

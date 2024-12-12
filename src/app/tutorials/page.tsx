@@ -1,54 +1,40 @@
 import { Container } from "@/components/container";
+import { authOptions } from "@/lib/auth";
 import TutorialSection from "@/sections/tutorial-section";
+import { getServerSession } from "next-auth";
 
-const tutorials = [
-  {
-    id: 1,
-    title: "Number System (0-9) | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-  {
-    id: 2,
-    title: "Word Meaning - Part 1 | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-  {
-    id: 3,
-    title: "Word Meaning - Part 2 | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-  {
-    id: 4,
-    title: "Number System (0-9) | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-  {
-    id: 5,
-    title: "Number System (0-9) | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-  {
-    id: 6,
-    title: "Number System (0-9) | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-  {
-    id: 7,
-    title: "Number System (0-9) | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-  {
-    id: 8,
-    title: "Number System (0-9) | Japanese Language in Bangla",
-    url: "https://www.youtube.com/embed/12VQYnuIgrM?si=K98SkVMXMdebFNwG",
-  },
-];
+type Tutorials = {
+  id: string;
+  title: string;
+  url: string;
+};
+
+async function getTutorials(accessToken?: string): Promise<Tutorials[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/tutorials`,
+    {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result.data;
+}
 
 export default async function TutorialsPage() {
+  const session = await getServerSession(authOptions);
+  const tutorials = await getTutorials(session?.user.accessToken);
   return (
     <main>
       <Container>
-        <TutorialSection tutorials={tutorials} />
+        {tutorials.length > 0 ? (
+          <TutorialSection tutorials={tutorials} />
+        ) : (
+          <div className="h-96 flex justify-center items-center">
+            No tutorials available
+          </div>
+        )}
       </Container>
     </main>
   );
