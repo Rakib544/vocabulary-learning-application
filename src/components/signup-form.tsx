@@ -10,9 +10,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useMutation from "@/hooks/use-mutation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 const FormSchema = z
@@ -43,8 +47,42 @@ export default function SignUpForm() {
   });
   type FormValues = z.infer<typeof FormSchema>;
 
+  const router = useRouter();
+
+  const mutationFunction = async (payload: FormValues) => {
+    try {
+      const { email, name, password } = payload;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            name,
+            password,
+            photoUrl: "https://google.com",
+          }),
+        }
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+      const result = await response.json();
+      toast(result.message);
+      router.push("/auth/signin");
+    } catch (error: any) {
+      toast(error.message);
+    }
+  };
+
+  const { isLoading, mutate } = useMutation(mutationFunction);
+
   async function onSubmit(data: FormValues) {
-    console.log(data);
+    mutate({ ...data });
   }
 
   return (
@@ -132,7 +170,13 @@ export default function SignUpForm() {
             )}
           />
 
-          <Button type="submit" size="lg" className="w-full">
+          <Button
+            type="submit"
+            size="lg"
+            className="w-full"
+            disabled={isLoading}
+          >
+            {isLoading && <Loader2 size={20} className="animate-spin" />}{" "}
             Register
           </Button>
         </form>

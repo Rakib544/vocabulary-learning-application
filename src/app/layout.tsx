@@ -1,6 +1,7 @@
 import { Container } from "@/components/container";
 import { Footer } from "@/components/footer";
 import Navbar from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
@@ -71,6 +72,7 @@ export default function RootLayout({
         </header>
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

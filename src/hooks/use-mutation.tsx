@@ -8,7 +8,6 @@ type MutationResult<T> = {
 };
 
 const useMutation = <T,>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mutationFunction: (payload: T) => Promise<any>
 ): MutationResult<T> => {
   const [isLoading, setIsLoading] = useState(false);
