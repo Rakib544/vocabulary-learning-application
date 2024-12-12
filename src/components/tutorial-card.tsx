@@ -35,7 +35,7 @@ export default function TutorialCard({
                 Edit tutorial
               </Link>
             </DropdownMenuItem>
-            <TutorialDeleteModal>
+            <TutorialDeleteModal id={id}>
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 Delete tutorial
               </DropdownMenuItem>
