@@ -62,7 +62,7 @@ export const columns: ColumnDef<User>[] = [
     id: "actions",
     header: "Action",
     cell: ({ row }) => {
-      const { role } = row.original;
+      const { role, id } = row.original;
 
       return (
         <DropdownMenu>
@@ -75,13 +75,13 @@ export const columns: ColumnDef<User>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             {role === "USER" ? (
-              <RoleChangeModal>
+              <RoleChangeModal id={id} role="ADMIN">
                 <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                   Promote to admin
                 </DropdownMenuItem>
               </RoleChangeModal>
             ) : (
-              <RoleChangeModal>
+              <RoleChangeModal role="USER" id={id}>
                 <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                   Demote to normal user
                 </DropdownMenuItem>

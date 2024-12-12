@@ -6,26 +6,28 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { User, columns } from "./columns";
 import { DataTable } from "./data-table";
 
-const users: User[] = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john@example.com",
-    role: "USER",
-  },
-  {
-    id: "2",
-    name: "Alice Smith",
-    email: "alice@example.com",
-    role: "ADMIN",
-  },
-];
+async function getUsers(accessToken?: string): Promise<User[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/users`,
+    {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result.data;
+}
 
 export default async function Students() {
+  const session = await getServerSession(authOptions);
+  const users = await getUsers(session?.user.accessToken);
   return (
     <div>
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
