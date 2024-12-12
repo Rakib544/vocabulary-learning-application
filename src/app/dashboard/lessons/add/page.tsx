@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import LessonAddForm from "./lesson-add-form";
 
-export default function AddTutorial() {
+export default function AddLesson() {
   return (
     <div>
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">

@@ -7,13 +7,13 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
-import LessonEditForm from "./lesson-edit-form";
+import TutorialAddForm from "./vocabulary-add-form";
 
-export default async function LessonEditPage() {
+export default function AddVocabulary() {
   return (
     <div>
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-        Edit Lesson
+        Add a new vocabulary
       </h2>
       <Breadcrumb>
         <BreadcrumbList>
@@ -25,18 +25,18 @@ export default async function LessonEditPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem className="text-sm text-foreground font-medium">
             <BreadcrumbLink asChild>
-              <Link href="/dashboard/lessons">Lessons</Link>
+              <Link href="/dashboard/vocabularies">Vocabularies</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem className="text-sm">
             <BreadcrumbPage className="text-muted-foreground">
-              How to become a software engineer
+              Add
             </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <LessonEditForm title="Hello world" lessonNo={1} />
+      <TutorialAddForm />
     </div>
   );
 }

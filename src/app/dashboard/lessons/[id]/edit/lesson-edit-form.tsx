@@ -82,7 +82,7 @@ export default function LessonEditForm({
           </div>
 
           <div className="flex justify-end mt-8">
-            <Button type="submit">Add lesson</Button>
+            <Button type="submit">Update lesson</Button>
           </div>
         </form>
       </Form>
