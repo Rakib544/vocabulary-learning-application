@@ -14,7 +14,7 @@ import { type ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
 export type Vocabulary = {
-  id: string | number;
+  id: string;
   word: string;
   pronunciation: string;
   whenToSay: string;
@@ -65,7 +65,7 @@ export const columns: ColumnDef<Vocabulary>[] = [
                 Edit vocabulary
               </Link>
             </DropdownMenuItem>
-            <VocabularyDeleteModal>
+            <VocabularyDeleteModal id={id}>
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 Delete vocabulary
               </DropdownMenuItem>

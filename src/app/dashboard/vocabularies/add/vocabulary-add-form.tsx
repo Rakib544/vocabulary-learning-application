@@ -22,6 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -42,9 +43,7 @@ export default function VocabularyAddForm({ lessons }: { lessons: Lesson[] }) {
   const { data: session } = useSession();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      adminEmail: session?.user.email,
-    },
+    defaultValues: {},
   });
   type FormValues = z.infer<typeof FormSchema>;
 
@@ -83,6 +82,12 @@ export default function VocabularyAddForm({ lessons }: { lessons: Lesson[] }) {
   async function onSubmit(data: FormValues) {
     mutate(data);
   }
+
+  useEffect(() => {
+    if (session?.user.email) {
+      form.setValue("adminEmail", session?.user.email || "");
+    }
+  }, [session?.user?.email]);
 
   return (
     <div className="max-w-xl mt-12">
@@ -173,7 +178,7 @@ export default function VocabularyAddForm({ lessons }: { lessons: Lesson[] }) {
                     </FormControl>
                     <SelectContent>
                       {lessons.map((lesson) => (
-                        <SelectItem value={lesson.id}>
+                        <SelectItem key={lesson.id} value={lesson.id}>
                           Lesson - {lesson.lessonNo}
                         </SelectItem>
                       ))}
