@@ -19,10 +19,10 @@ export default function SignUp() {
           <div className="max-w-lg w-full mx-auto px-6">
             <Link
               aria-label="Home"
-              href="/"
+              href="/lessons"
               className="text-2xl font-extrabold text-primary relative inline-block mb-6"
             >
-              Agenify
+              KanaBridge
               <TextUnderline />
             </Link>
             <h1 className="font-extrabold text-2xl text-foreground">

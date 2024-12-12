@@ -15,7 +15,10 @@ export default function NotFound() {
           <p className="text-muted-foreground">
             Sorry, we couldn’t find the page you’re looking for.
           </p>
-          <Link href="/" className={buttonVariants({ className: "mt-4" })}>
+          <Link
+            href="/lessons"
+            className={buttonVariants({ className: "mt-4" })}
+          >
             Go to home page
           </Link>
         </FadeIn>

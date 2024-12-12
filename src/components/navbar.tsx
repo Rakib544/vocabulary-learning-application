@@ -31,10 +31,10 @@ export default function Navbar() {
       <Container className="flex w-full !px-0 justify-between items-center">
         <Link
           aria-label="Home"
-          href="/"
+          href="/lessons"
           className="text-2xl font-extrabold text-primary relative"
         >
-          Agenify
+          KanaBridge
           <TextUnderline />
         </Link>
 
@@ -50,16 +50,17 @@ export default function Navbar() {
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
+          <Link
+            href="/auth/signin"
+            className={buttonVariants({
+              size: "lg",
+              className: "hidden lg:inline-flex ml-10",
+            })}
+          >
+            Signin
+          </Link>
         </NavigationMenu>
-        <Link
-          href="/contact-1"
-          className={buttonVariants({
-            size: "lg",
-            className: "hidden lg:inline-flex",
-          })}
-        >
-          Contact
-        </Link>
+
         <div className="lg:hidden">
           <MobileNavigation navLinks={navLinks} />
         </div>

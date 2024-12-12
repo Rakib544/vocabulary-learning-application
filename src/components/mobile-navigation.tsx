@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { MobileNavIcon } from "./icons";
+import { MobileNavIcon, TextUnderline } from "./icons";
 import {
   Accordion,
   AccordionContent,
@@ -140,7 +140,15 @@ const MobileNavigation: React.FC<{ navLinks: MobileNavigationProps[] }> = ({
       </Button>
 
       <SheetContent className="overflow-y-auto">
-        <NavigationMenu className="block max-w-none space-y-4">
+        <Link
+          aria-label="Home"
+          href="/lessons"
+          className="text-2xl font-extrabold text-primary relative inline-block ml-4"
+        >
+          KanaBridge
+          <TextUnderline />
+        </Link>
+        <NavigationMenu className="block max-w-none space-b-4">
           <NavigationMenuList className="flex-col items-start mt-8 w-full space-x-0 space-y-1">
             {navLinks.map((link) => (
               <NavigationMenuItem key={link.id} className="block w-full">
@@ -149,10 +157,10 @@ const MobileNavigation: React.FC<{ navLinks: MobileNavigationProps[] }> = ({
             ))}
             <li className="w-full">
               <Link
-                href="/contact-1"
+                href="/auth/signin"
                 className={buttonVariants({ className: "mt-4 w-full" })}
               >
-                Contact
+                Sigin
               </Link>
             </li>
           </NavigationMenuList>

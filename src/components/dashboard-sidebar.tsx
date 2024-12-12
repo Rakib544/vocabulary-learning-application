@@ -28,10 +28,10 @@ export default function DashboardSidebar({
         <div className="px-1 py-2 space-y-4">
           <Link
             aria-label="Home"
-            href="/"
+            href="/lessons"
             className="text-2xl font-extrabold text-primary relative inline-block ml-4"
           >
-            Agenify
+            KanaBridge
             <TextUnderline />
           </Link>
           <div className="space-y-1">
