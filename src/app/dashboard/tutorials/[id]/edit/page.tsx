@@ -1,0 +1,42 @@
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import Link from "next/link";
+import TutorialEditForm from "./tutorial-edit-form";
+
+export default async function TutorialEditPage() {
+  return (
+    <div>
+      <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+        Edit Tutorial
+      </h2>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem className="text-sm text-foreground font-medium">
+            <BreadcrumbLink asChild>
+              <Link href="/dashboard">Dashboard</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem className="text-sm text-foreground font-medium">
+            <BreadcrumbLink asChild>
+              <Link href="/dashboard/tutorials">Tutorials</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem className="text-sm">
+            <BreadcrumbPage className="text-muted-foreground">
+              How to become a software engineer
+            </BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <TutorialEditForm title="Hello world" url="https://google.com" />
+    </div>
+  );
+}

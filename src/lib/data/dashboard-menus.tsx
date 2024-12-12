@@ -26,47 +26,9 @@ export const dashboardMenus = [
     ),
   },
   {
-    id: 2,
-    href: "/dashboard/jobs",
-    label: "Manage jobs",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className="mr-2 h-5 w-5 group-hover:text-foreground text-foreground group-data-[state=active]:text-white"
-        fill="none"
-      >
-        <path
-          d="M10 13.3333C10 13.0233 10 12.8683 10.0341 12.7412C10.1265 12.3961 10.3961 12.1265 10.7412 12.0341C10.8683 12 11.0233 12 11.3333 12H12.6667C12.9767 12 13.1317 12 13.2588 12.0341C13.6039 12.1265 13.8735 12.3961 13.9659 12.7412C14 12.8683 14 13.0233 14 13.3333V14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14V13.3333Z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M13.9 13.5H15.0826C16.3668 13.5 17.0089 13.5 17.5556 13.3842C19.138 13.049 20.429 12.0207 20.9939 10.6455C21.1891 10.1704 21.2687 9.59552 21.428 8.4457C21.4878 8.01405 21.5177 7.79823 21.489 7.62169C21.4052 7.10754 20.9932 6.68638 20.4381 6.54764C20.2475 6.5 20.0065 6.5 19.5244 6.5H4.47562C3.99351 6.5 3.75245 6.5 3.56187 6.54764C3.00682 6.68638 2.59477 7.10754 2.51104 7.62169C2.48229 7.79823 2.51219 8.01405 2.57198 8.4457C2.73128 9.59552 2.81092 10.1704 3.00609 10.6455C3.571 12.0207 4.86198 13.049 6.44436 13.3842C6.99105 13.5 7.63318 13.5 8.91743 13.5H10.1"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M3.5 11.5V13.5C3.5 17.2712 3.5 19.1569 4.60649 20.3284C5.71297 21.5 7.49383 21.5 11.0556 21.5H12.9444C16.5062 21.5 18.287 21.5 19.3935 20.3284C20.5 19.1569 20.5 17.2712 20.5 13.5V11.5"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M15.5 6.5L15.4227 6.14679C15.0377 4.38673 14.8452 3.50671 14.3869 3.00335C13.9286 2.5 13.3199 2.5 12.1023 2.5H11.8977C10.6801 2.5 10.0714 2.5 9.61309 3.00335C9.15478 3.50671 8.96228 4.38673 8.57727 6.14679L8.5 6.5"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-      </svg>
-    ),
-  },
-  {
     id: 3,
-    href: "/dashboard/job-applications",
-    label: "Applications",
+    href: "/dashboard/tutorials",
+    label: "Tutorials",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -106,8 +68,8 @@ export const dashboardMenus = [
   },
   {
     id: 4,
-    href: "/dashboard/articles",
-    label: "Articles",
+    href: "/dashboard/lessons",
+    label: "Lessons",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -141,8 +103,8 @@ export const dashboardMenus = [
   },
   {
     id: 5,
-    href: "/dashboard/case-studies",
-    label: "Case Studies",
+    href: "/dashboard/vocabularies",
+    label: "Vocabularies",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -172,8 +134,8 @@ export const dashboardMenus = [
   },
   {
     id: 7,
-    href: "/dashboard/teams",
-    label: "Teams",
+    href: "/dashboard/users",
+    label: "Users",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -201,109 +163,6 @@ export const dashboardMenus = [
         />
         <path
           d="M17 14C19.7614 14 22 16.2386 22 19C22 20.1046 21.1046 21 20 21H18.5"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    id: 6,
-    href: "/dashboard/portfolios",
-    label: "Portfolios",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className="mr-2 h-5 w-5 group-hover:text-foreground text-foreground group-data-[state=active]:text-white"
-        fill="none"
-      >
-        <path
-          d="M13 2H13.2727C16.5339 2 18.1645 2 19.2969 2.79784C19.6214 3.02643 19.9094 3.29752 20.1523 3.60289C21 4.66867 21 6.20336 21 9.27273V11.8182C21 14.7814 21 16.2629 20.5311 17.4462C19.7772 19.3486 18.1829 20.8491 16.1616 21.5586C14.9044 22 13.3302 22 10.1818 22C8.38275 22 7.48322 22 6.76478 21.7478C5.60979 21.3424 4.69875 20.4849 4.26796 19.3979C4 18.7217 4 17.8751 4 16.1818V12"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M21 12C21 13.8409 19.5076 15.3333 17.6667 15.3333C17.0009 15.3333 16.216 15.2167 15.5686 15.3901C14.9935 15.5442 14.5442 15.9935 14.3901 16.5686C14.2167 17.216 14.3333 18.0009 14.3333 18.6667C14.3333 20.5076 12.8409 22 11 22"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M11 6L3 6M7 2V10"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    id: 9,
-    href: "/dashboard/privacy-policy",
-    label: "Privacy & policy",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className="mr-2 h-5 w-5 group-hover:text-foreground text-foreground group-data-[state=active]:text-white"
-        fill="none"
-      >
-        <path
-          d="M11 22H10.7273C7.46607 22 5.83546 22 4.70307 21.2022C4.37862 20.9736 4.09058 20.7025 3.8477 20.3971C3 19.3313 3 17.7966 3 14.7273V12.1818C3 9.21865 3 7.73706 3.46894 6.55375C4.22281 4.65142 5.81714 3.15088 7.83836 2.44135C9.09563 2 10.6698 2 13.8182 2C15.6173 2 16.5168 2 17.2352 2.2522C18.3902 2.65765 19.3012 3.5151 19.732 4.60214C20 5.27832 20 6.12494 20 7.81818V10"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M3 12C3 10.1591 4.49238 8.66667 6.33333 8.66667C6.99912 8.66667 7.78404 8.78333 8.43137 8.60988C9.00652 8.45576 9.45576 8.00652 9.60988 7.43136C9.78333 6.78404 9.66667 5.99912 9.66667 5.33333C9.66667 3.49238 11.1591 2 13 2"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M15.5312 16.36V14.9523C15.5312 13.8741 16.4127 13 17.5 13C17.9887 13 18.4359 13.1766 18.7801 13.469M16.8437 22H18.1563C19.1777 22 19.6884 22 20.0749 21.7951C20.3802 21.6333 20.6302 21.3854 20.7934 21.0827C21 20.6993 21 20.1929 21 19.18C21 18.1671 21 17.6607 20.7934 17.2773C20.6302 16.9746 20.3802 16.7267 20.0749 16.5649C19.6884 16.36 19.1777 16.36 18.1563 16.36H16.8437C15.8223 16.36 15.3116 16.36 14.9251 16.5649C14.6198 16.7267 14.3698 16.9746 14.2066 17.2773C14 17.6607 14 18.1671 14 19.18C14 20.1929 14 20.6993 14.2066 21.0827C14.3698 21.3854 14.6198 21.6333 14.9251 21.7951C15.3116 22 15.8223 22 16.8437 22Z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    id: 10,
-    href: "/dashboard/terms-condition",
-    label: "Terms & condition",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className="mr-2 h-5 w-5 group-hover:text-foreground text-foreground group-data-[state=active]:text-white"
-        fill="none"
-      >
-        <path
-          d="M3.5 3.97802C3.5 2.88559 4.39543 2 5.5 2C6.60457 2 7.5 2.88559 7.5 3.97802C7.5 4.3718 7.38366 4.7387 7.18311 5.04694C6.58541 5.96561 5.5 6.84163 5.5 7.93407V8.42857M5.5 11H5.51198"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M10.5 2H12.7727C16.0339 2 17.6645 2 18.7969 2.79784C19.1214 3.02643 19.4094 3.29752 19.6523 3.60289C20.5 4.66867 20.5 6.20336 20.5 9.27273V11.8182C20.5 14.7814 20.5 16.2629 20.0311 17.4462C19.2772 19.3486 17.6829 20.8491 15.6616 21.5586C14.4044 22 12.8302 22 9.68182 22C7.88275 22 6.98322 22 6.26478 21.7478C5.10979 21.3424 4.19875 20.4849 3.76796 19.3979C3.5 18.7217 3.5 17.8751 3.5 16.1818V14"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M20.5 12C20.5 13.8409 19.0076 15.3333 17.1667 15.3333C16.5009 15.3333 15.716 15.2167 15.0686 15.3901C14.4935 15.5442 14.0442 15.9935 13.8901 16.5686C13.7167 17.216 13.8333 18.0009 13.8333 18.6667C13.8333 20.5076 12.3409 22 10.5 22"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
