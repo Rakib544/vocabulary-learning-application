@@ -9,42 +9,26 @@ import {
 import Link from "next/link";
 import { DataTable } from "./data-table";
 
-import { columns } from "./columns";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { columns, type Lesson } from "./columns";
 
-const lessons = [
-  {
-    id: "1",
-    title: "Introduction to Greetings",
-    lessonNo: 1,
-    totalVocabularies: 5,
-  },
-  {
-    id: "2",
-    title: "Basic Numbers",
-    lessonNo: 2,
-    totalVocabularies: 3,
-  },
-  {
-    id: "3",
-    title: "Everyday Phrases",
-    lessonNo: 3,
-    totalVocabularies: 15,
-  },
-  {
-    id: "4",
-    title: "Introducing Yourself",
-    lessonNo: 4,
-    totalVocabularies: 25,
-  },
-  {
-    id: "5",
-    title: "Common Questions",
-    lessonNo: 5,
-    totalVocabularies: 2,
-  },
-];
+async function getLessons(accessToken?: string): Promise<Lesson[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/lessons`,
+    {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result.data;
+}
 
 export default async function DashboardLessonPage() {
+  const session = await getServerSession(authOptions);
+  const lessons = await getLessons(session?.user.accessToken);
   return (
     <div>
       <div>

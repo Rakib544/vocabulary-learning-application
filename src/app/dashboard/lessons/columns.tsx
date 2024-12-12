@@ -14,16 +14,16 @@ import { type ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
 export type Lesson = {
-  id: string | number;
-  title: string;
+  id: string;
+  name: string;
   lessonNo: number;
   totalVocabularies: number;
 };
 
 export const columns: ColumnDef<Lesson>[] = [
   {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: "name",
+    header: "Name",
   },
   {
     accessorKey: "lessonNo",
@@ -52,7 +52,7 @@ export const columns: ColumnDef<Lesson>[] = [
             <DropdownMenuItem asChild>
               <Link href={`/dashboard/lessons/${id}/edit`}>Edit lesson</Link>
             </DropdownMenuItem>
-            <LessonDeleteModal>
+            <LessonDeleteModal id={id}>
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 Delete lesson
               </DropdownMenuItem>
