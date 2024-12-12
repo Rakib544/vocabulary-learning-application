@@ -1,3 +1,4 @@
+import { Lesson } from "@/app/dashboard/lessons/columns";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,10 +7,52 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { Vocabulary } from "../../columns";
 import VocabularyEditForm from "./vocabulary-edit-form";
 
-export default async function VocabularyEditPage() {
+async function getVocabulary(
+  id: string,
+  accessToken?: string
+): Promise<Vocabulary & { lessonId: string }> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/vocabularies/${id}`,
+    {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result.data;
+}
+
+async function getLessons(accessToken?: string): Promise<Lesson[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/lessons`,
+    {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result.data;
+}
+
+export default async function VocabularyEditPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const session = await getServerSession(authOptions);
+  const [vocabulary, lessons] = await Promise.all([
+    getVocabulary(params.id, session?.user.accessToken),
+    getLessons(session?.user.accessToken),
+  ]);
+
   return (
     <div>
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
@@ -31,12 +74,12 @@ export default async function VocabularyEditPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem className="text-sm">
             <BreadcrumbPage className="text-muted-foreground">
-              How to become a software engineer
+              {vocabulary.word}
             </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <VocabularyEditForm />
+      <VocabularyEditForm vocabulary={vocabulary} lessons={lessons} />
     </div>
   );
 }
