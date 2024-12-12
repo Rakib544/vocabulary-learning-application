@@ -4,7 +4,9 @@ import Navbar from "@/components/navbar";
 import { NextAuthProvider } from "@/components/nextauth-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
+import { authOptions } from "@/lib/auth";
 import type { Metadata, Viewport } from "next";
+import { getServerSession } from "next-auth";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -58,18 +60,23 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
       <body className={workSans.className} suppressHydrationWarning={true}>
         <NextAuthProvider>
           <header className=" sticky top-0 w-full z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <Container>
-              <Navbar />
+              <Navbar
+                photoUrl={session?.user.photoUrl}
+                name={session?.user.name}
+                email={session?.user.email}
+              />
             </Container>
           </header>
           {children}

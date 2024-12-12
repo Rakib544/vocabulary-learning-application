@@ -1,6 +1,5 @@
 "use client";
 import { navLinks } from "@/lib/data/navigation-data";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container } from "./container";
@@ -14,17 +13,23 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import UserNav from "./user-nav";
 
-export default function Navbar() {
-  const { data: session } = useSession();
+export default function Navbar({
+  name,
+  photoUrl,
+  email,
+}: {
+  name?: string;
+  photoUrl?: string;
+  email?: string;
+}) {
   const pathname = usePathname();
   const isAuthRoute = pathname.startsWith("/auth/");
   const isDashboardRoute = pathname.startsWith("/dashboard");
   const isDocsRoute = pathname.startsWith("/docs");
 
   const isNavHidden = isAuthRoute || isDashboardRoute || isDocsRoute;
-
-  console.log(session);
 
   return (
     <NavigationMenu
@@ -54,14 +59,18 @@ export default function Navbar() {
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
-          <Link
-            href="/auth/signin"
-            className={buttonVariants({
-              className: "hidden lg:inline-flex ml-10",
-            })}
-          >
-            Signin
-          </Link>
+          {name && photoUrl && email ? (
+            <UserNav name={name} email={email} photoUrl={photoUrl} />
+          ) : (
+            <Link
+              href="/auth/signin"
+              className={buttonVariants({
+                className: "hidden lg:inline-flex ml-10",
+              })}
+            >
+              Signin
+            </Link>
+          )}
         </NavigationMenu>
 
         <div className="lg:hidden">

@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user, ...result.data, expiresIn: expirationTime };
     },
     async session({ token, session }) {
-      session.user = token;
+      session.user = token as any;
       return session;
     },
   },

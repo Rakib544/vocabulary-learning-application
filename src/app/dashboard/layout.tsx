@@ -3,7 +3,9 @@ import DashboardSidebar from "@/components/dashboard-sidebar";
 import { SearchModal } from "@/components/search-modal";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserNav from "@/components/user-nav";
+import { authOptions } from "@/lib/auth";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -13,11 +15,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <div>
       <header className="fixed w-full lg:w-[calc(100%-281px)] ml-auto top-0 right-0 left-auto z-30 mb-6 flex items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 lg:px-9 h-20">
@@ -27,9 +30,15 @@ export default function DashboardLayout({
           </div>
           <SearchModal />
         </div>
-        <div className="flex gap-x-4">
-          <UserNav />
-        </div>
+        {session?.user && (
+          <div className="flex gap-x-4">
+            <UserNav
+              photoUrl={session.user.photoUrl}
+              name={session.user.name}
+              email={session.user.email}
+            />
+          </div>
+        )}
       </header>
       <div className="min-h-full flex flex-column lg:flex-row">
         <aside className="shrink-0 hidden lg:block lg:w-[280px]">
