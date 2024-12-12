@@ -63,6 +63,7 @@ export default function LessonEditForm({
       const result = await response.json();
       toast(result.message);
       router.push("/dashboard/lessons");
+      router.refresh();
     } catch (error: any) {
       toast(error.message);
     }

@@ -6,8 +6,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { columns } from "./columns";
+import { columns, Vocabulary } from "./columns";
 import { DataTable } from "./data-table";
 
 const vocabularies = [
@@ -46,7 +48,22 @@ const vocabularies = [
   },
 ];
 
+async function getVocabularies(accessToken?: string): Promise<Vocabulary[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/vocabularies`,
+    {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result.data;
+}
+
 export default async function DashboardVocabulariesPage() {
+  const session = await getServerSession(authOptions);
+  const vocabularies = await getVocabularies(session?.user.accessToken);
   return (
     <div>
       <div>

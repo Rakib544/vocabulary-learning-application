@@ -6,10 +6,28 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { Lesson } from "../../lessons/columns";
 import TutorialAddForm from "./vocabulary-add-form";
 
-export default function AddVocabulary() {
+async function getLessons(accessToken?: string): Promise<Lesson[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/lessons`,
+    {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result.data;
+}
+
+export default async function AddVocabulary() {
+  const session = await getServerSession(authOptions);
+  const lessons = await getLessons(session?.user.accessToken);
   return (
     <div>
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
@@ -36,7 +54,7 @@ export default function AddVocabulary() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <TutorialAddForm />
+      <TutorialAddForm lessons={lessons} />
     </div>
   );
 }

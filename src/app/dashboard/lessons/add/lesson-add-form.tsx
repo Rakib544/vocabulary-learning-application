@@ -49,12 +49,12 @@ export default function LessonAddForm() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(errorData);
         throw new Error(errorData.message);
       }
       const result = await response.json();
       toast(result.message);
       router.push("/dashboard/lessons");
+      router.refresh();
     } catch (error: any) {
       toast(error.message);
     }

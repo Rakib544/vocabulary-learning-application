@@ -19,7 +19,9 @@ export type Vocabulary = {
   pronunciation: string;
   whenToSay: string;
   meaning: string;
-  lessonNo: number;
+  lesson: {
+    lessonNo: number;
+  };
 };
 
 export const columns: ColumnDef<Vocabulary>[] = [
@@ -40,8 +42,8 @@ export const columns: ColumnDef<Vocabulary>[] = [
     header: "Meaning",
   },
   {
-    accessorKey: "lessonNo",
-    header: "Lesson No",
+    accessorKey: "lesson.lessonNo",
+    header: "Lesson Number",
   },
   {
     id: "actions",
