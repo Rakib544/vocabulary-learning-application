@@ -53,7 +53,6 @@ export default function Navbar() {
           <Link
             href="/auth/signin"
             className={buttonVariants({
-              size: "lg",
               className: "hidden lg:inline-flex ml-10",
             })}
           >

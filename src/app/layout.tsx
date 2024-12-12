@@ -1,4 +1,5 @@
 import { Container } from "@/components/container";
+import { Footer } from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
@@ -69,6 +70,7 @@ export default function RootLayout({
           </Container>
         </header>
         {children}
+        <Footer />
       </body>
     </html>
   );
