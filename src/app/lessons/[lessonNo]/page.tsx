@@ -27,7 +27,7 @@ type Lesson = {
   }[];
 };
 
-async function fetchSingleLesson(
+async function getLesson(
   lessonNo: number,
   accessToken?: string
 ): Promise<Lesson> {
@@ -52,7 +52,7 @@ export default async function LessonDetailsPage({
   const { lessonNo } = params;
   const session = await getServerSession(authOptions);
 
-  const lesson = await fetchSingleLesson(lessonNo, session?.user.accessToken);
+  const lesson = await getLesson(lessonNo, session?.user.accessToken);
 
   return (
     <main>

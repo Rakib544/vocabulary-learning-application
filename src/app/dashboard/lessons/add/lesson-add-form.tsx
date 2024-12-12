@@ -10,12 +10,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useMutation from "@/hooks/use-mutation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const FormSchema = z.object({
-  title: z.string().trim().min(1, { message: "Title is required" }),
+  name: z.string().trim().min(1, { message: "Name is required" }),
   lessonNo: z.coerce.number().int().gt(0),
 });
 export default function LessonAddForm() {
@@ -25,8 +30,40 @@ export default function LessonAddForm() {
   });
   type FormValues = z.infer<typeof FormSchema>;
 
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const mutationFunction = async (data: FormValues) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/lessons`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${session?.user.accessToken}`,
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+        throw new Error(errorData.message);
+      }
+      const result = await response.json();
+      toast(result.message);
+      router.push("/dashboard/lessons");
+    } catch (error: any) {
+      toast(error.message);
+    }
+  };
+
+  const { isLoading, mutate } = useMutation(mutationFunction);
+
   async function onSubmit(data: FormValues) {
-    console.log(data);
+    mutate(data);
   }
 
   return (
@@ -36,10 +73,10 @@ export default function LessonAddForm() {
           <div className="space-y-6">
             <FormField
               control={form.control}
-              name="title"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>Lesson Name</FormLabel>
                   <FormControl>
                     <Input
                       autoFocus
@@ -57,7 +94,7 @@ export default function LessonAddForm() {
               name="lessonNo"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Lesson No</FormLabel>
+                  <FormLabel>Lesson Number</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -73,7 +110,10 @@ export default function LessonAddForm() {
           </div>
 
           <div className="flex justify-end mt-8">
-            <Button type="submit">Add lesson</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading && <Loader2 size={20} className="animate-spin" />} Add
+              lesson
+            </Button>
           </div>
         </form>
       </Form>

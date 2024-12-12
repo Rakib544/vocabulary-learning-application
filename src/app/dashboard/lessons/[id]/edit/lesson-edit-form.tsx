@@ -10,32 +10,68 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useMutation from "@/hooks/use-mutation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const FormSchema = z.object({
-  title: z.string().trim().min(1, { message: "Title is required" }),
+  name: z.string().trim().min(1, { message: "name is required" }),
   lessonNo: z.coerce.number().int().gt(0),
 });
 export default function LessonEditForm({
-  title,
+  name,
   lessonNo,
+  id,
 }: {
-  title: string;
+  name: string;
   lessonNo: number;
+  id: string;
 }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title,
+      name,
       lessonNo,
     },
   });
   type FormValues = z.infer<typeof FormSchema>;
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const mutateFunction = async (data: FormValues) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/lessons/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${session?.user.accessToken}`,
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message);
+      }
+      const result = await response.json();
+      toast(result.message);
+      router.push("/dashboard/lessons");
+    } catch (error: any) {
+      toast(error.message);
+    }
+  };
+
+  const { isLoading, mutate } = useMutation(mutateFunction);
 
   async function onSubmit(data: FormValues) {
-    console.log(data);
+    mutate(data);
   }
 
   return (
@@ -45,10 +81,10 @@ export default function LessonEditForm({
           <div className="space-y-6">
             <FormField
               control={form.control}
-              name="title"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>Lesson Name</FormLabel>
                   <FormControl>
                     <Input
                       autoFocus
@@ -82,7 +118,10 @@ export default function LessonEditForm({
           </div>
 
           <div className="flex justify-end mt-8">
-            <Button type="submit">Update lesson</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? <Loader2 size={20} className="animate-spin" /> : ""}{" "}
+              Update lesson
+            </Button>
           </div>
         </form>
       </Form>

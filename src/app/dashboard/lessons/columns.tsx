@@ -37,7 +37,7 @@ export const columns: ColumnDef<Lesson>[] = [
     id: "actions",
     header: "Action",
     cell: ({ row }) => {
-      const { id } = row.original;
+      const { lessonNo, id } = row.original;
 
       return (
         <DropdownMenu>
@@ -50,7 +50,9 @@ export const columns: ColumnDef<Lesson>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild>
-              <Link href={`/dashboard/lessons/${id}/edit`}>Edit lesson</Link>
+              <Link href={`/dashboard/lessons/${lessonNo}/edit`}>
+                Edit lesson
+              </Link>
             </DropdownMenuItem>
             <LessonDeleteModal id={id}>
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>

@@ -111,7 +111,7 @@ export default function TutorialAddForm() {
           <div className="flex justify-end mt-8">
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 size={20} className="animate-spin" />} Add
-              lesson
+              tutorial
             </Button>
           </div>
         </form>
