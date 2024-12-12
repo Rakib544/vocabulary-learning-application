@@ -10,9 +10,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useMutation from "@/hooks/use-mutation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 const FormSchema = z.object({
@@ -33,8 +37,30 @@ export default function LoginForm() {
   });
   type FormValues = z.infer<typeof FormSchema>;
 
+  const mutationFunction = async (payload: FormValues) => {
+    try {
+      const response = await signIn("credentials", {
+        email: payload.email,
+        password: payload.password,
+        redirect: false,
+      });
+
+      if (response?.status === 200) {
+        toast("Login successful");
+        window.location.replace(window.location.origin + "/dashboard");
+        return;
+      }
+      toast(response?.error ?? "Failed to login");
+      return { data: response };
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const { isLoading, mutate } = useMutation(mutationFunction);
+
   async function onSubmit(data: FormValues) {
-    console.log(data);
+    mutate({ email: data.email, password: data.password });
   }
 
   return (
@@ -82,8 +108,13 @@ export default function LoginForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" size="lg" className="w-full">
-            Log in
+          <Button
+            type="submit"
+            size="lg"
+            className="w-full"
+            disabled={isLoading}
+          >
+            {isLoading && <Loader2 size={20} className="animate-spin" />} Log in
           </Button>
         </form>
       </Form>
