@@ -73,11 +73,9 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex gap-y-4 flex-col sm:flex-row items-end sm:items-center justify-between py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
+          placeholder="Filter all fields..."
+          value={(table.getState().globalFilter as string) ?? ""}
+          onChange={(event) => table.setGlobalFilter(event.target.value)}
           className="max-w-lg pl-6 !rounded-full order-2 sm:order-1"
         />
         <div className="flex !justify-end gap-x-4 order-1 sm:order-2">

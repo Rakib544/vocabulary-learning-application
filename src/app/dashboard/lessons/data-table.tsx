@@ -32,6 +32,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { CirclePlus } from "lucide-react";
+import Link from "next/link";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -79,6 +81,11 @@ export function DataTable<TData, TValue>({
           className="max-w-lg pl-6 !rounded-full order-2 sm:order-1"
         />
         <div className="flex !justify-end gap-x-4 order-1 sm:order-2">
+          <Button asChild>
+            <Link href="/dashboard/lessons/add">
+              Add New <CirclePlus className="h-[18px] w-[18px] ml-1" />
+            </Link>
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
