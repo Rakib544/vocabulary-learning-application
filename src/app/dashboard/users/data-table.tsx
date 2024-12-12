@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   flexRender,
   getCoreRowModel,
@@ -23,7 +23,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { CirclePlus } from "@/components/icons";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -33,7 +32,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Link from "next/link";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -83,9 +81,6 @@ export function DataTable<TData, TValue>({
           className="max-w-lg pl-6 !rounded-full order-2 sm:order-1"
         />
         <div className="flex !justify-end gap-x-4 order-1 sm:order-2">
-          <Link href="/dashboard/teams/new" className={buttonVariants()}>
-            <CirclePlus className="h-4 w-4 stroke-[2.5px] mr-1" /> Add New
-          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">

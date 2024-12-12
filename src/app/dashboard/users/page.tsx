@@ -5,8 +5,6 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import teamImage1 from "@/images/team/team-1.jpeg";
-import teamImage2 from "@/images/team/team-2.jpeg";
 import Link from "next/link";
 import { Team, columns } from "./columns";
 import { DataTable } from "./data-table";
@@ -14,25 +12,15 @@ import { DataTable } from "./data-table";
 const users: Team[] = [
   {
     id: "1",
-    user: {
-      name: "John Doe",
-      image: teamImage1,
-    },
-    phone: "+1234567890",
-    status: "active",
+    name: "John Doe",
     email: "john@example.com",
-    country: "United States",
+    role: "USER",
   },
   {
     id: "2",
-    user: {
-      name: "Alice Smith",
-      image: teamImage2,
-    },
-    phone: "+9876543210",
-    status: "suspended",
+    name: "Alice Smith",
     email: "alice@example.com",
-    country: "Canada",
+    role: "ADMIN",
   },
 ];
 
@@ -40,7 +28,7 @@ export default async function Students() {
   return (
     <div>
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-        Manage team members
+        Manage users
       </h2>
       <Breadcrumb>
         <BreadcrumbList>
@@ -52,7 +40,7 @@ export default async function Students() {
           <BreadcrumbSeparator />
           <BreadcrumbItem className="text-sm text-foreground font-medium">
             <BreadcrumbLink asChild>
-              <Link href="/dashboard/teams">Teams</Link>
+              <Link href="/dashboard/users">Users</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>
