@@ -1,5 +1,6 @@
 "use client";
 import { navLinks } from "@/lib/data/navigation-data";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container } from "./container";
@@ -15,12 +16,15 @@ import {
 } from "./ui/navigation-menu";
 
 export default function Navbar() {
+  const { data: session } = useSession();
   const pathname = usePathname();
   const isAuthRoute = pathname.startsWith("/auth/");
   const isDashboardRoute = pathname.startsWith("/dashboard");
   const isDocsRoute = pathname.startsWith("/docs");
 
   const isNavHidden = isAuthRoute || isDashboardRoute || isDocsRoute;
+
+  console.log(session);
 
   return (
     <NavigationMenu

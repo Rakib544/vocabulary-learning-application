@@ -1,6 +1,7 @@
 import { Container } from "@/components/container";
 import { Footer } from "@/components/footer";
 import Navbar from "@/components/navbar";
+import { NextAuthProvider } from "@/components/nextauth-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
@@ -65,14 +66,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
       <body className={workSans.className} suppressHydrationWarning={true}>
-        <header className=" sticky top-0 w-full z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <Container>
-            <Navbar />
-          </Container>
-        </header>
-        {children}
-        <Footer />
-        <Toaster />
+        <NextAuthProvider>
+          <header className=" sticky top-0 w-full z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <Container>
+              <Navbar />
+            </Container>
+          </header>
+          {children}
+          <Footer />
+          <Toaster />
+        </NextAuthProvider>
       </body>
     </html>
   );

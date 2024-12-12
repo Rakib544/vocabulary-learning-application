@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
         const result = await response.json();
 
         const userData = {
-          ...result.data.user,
+          ...result.data,
         };
 
         return Promise.resolve(userData);
