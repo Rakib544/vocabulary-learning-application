@@ -6,10 +6,10 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
-import { Team, columns } from "./columns";
+import { User, columns } from "./columns";
 import { DataTable } from "./data-table";
 
-const users: Team[] = [
+const users: User[] = [
   {
     id: "1",
     name: "John Doe",

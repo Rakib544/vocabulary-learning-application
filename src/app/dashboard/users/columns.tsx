@@ -13,14 +13,14 @@ import {
 import { cn } from "@/lib/utils";
 import { type ColumnDef } from "@tanstack/react-table";
 
-export type Team = {
+export type User = {
   id: string;
   name: string;
   email: string;
   role: "USER" | "ADMIN";
 };
 
-export const columns: ColumnDef<Team>[] = [
+export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
