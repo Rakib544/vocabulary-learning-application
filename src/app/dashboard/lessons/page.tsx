@@ -3,6 +3,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
+  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
@@ -59,9 +60,7 @@ export default async function DashboardLessonPage() {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem className="text-sm text-foreground font-medium">
-              <BreadcrumbLink asChild>
-                <Link href="/dashboard/lessons">Lessons</Link>
-              </BreadcrumbLink>
+              <BreadcrumbPage>Lessons</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
