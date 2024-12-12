@@ -11,8 +11,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import useMutation from "@/hooks/use-mutation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -26,8 +31,39 @@ export default function TutorialAddForm() {
   });
   type FormValues = z.infer<typeof FormSchema>;
 
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const mutationFunction = async (data: FormValues) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/tutorials`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${session?.user.accessToken}`,
+          },
+          body: JSON.stringify({ title: data.title, url: data.url }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+      const result = await response.json();
+      toast(result.message);
+      router.push("/dashboard/tutorials");
+    } catch (error: any) {
+      toast(error.message);
+    }
+  };
+
+  const { isLoading, mutate } = useMutation(mutationFunction);
+
   async function onSubmit(data: FormValues) {
-    console.log(data);
+    mutate(data);
   }
 
   return (
@@ -45,7 +81,7 @@ export default function TutorialAddForm() {
                     <Input
                       autoFocus
                       {...field}
-                      placeholder="Ex: Software Engineer"
+                      placeholder="e.g. Introduction to japanese language"
                       className=""
                     />
                   </FormControl>
@@ -73,7 +109,10 @@ export default function TutorialAddForm() {
           </div>
 
           <div className="flex justify-end mt-8">
-            <Button type="submit">Add lesson</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading && <Loader2 size={20} className="animate-spin" />} Add
+              lesson
+            </Button>
           </div>
         </form>
       </Form>

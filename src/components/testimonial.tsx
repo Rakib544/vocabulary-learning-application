@@ -15,7 +15,7 @@ export function Testimonial({
     >
       <Container size="xs" className="relative">
         <figure>
-          <blockquote className="mt-10 font-display text-xl lg:text-2xl font-medium tracking-tight text-slate-900 sm:text-center">
+          <blockquote className="mt-10 font-display text-xl font-medium tracking-tight text-slate-900 sm:text-center">
             {children}
           </blockquote>
           <figcaption className="mt-10 flex items-center justify-center text-center">

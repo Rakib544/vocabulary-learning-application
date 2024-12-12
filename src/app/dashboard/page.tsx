@@ -54,7 +54,7 @@ export default function Dashboard() {
           </li>
         ))}
       </ul>
-      <div className="bg-slate-50 rounded-[40px] mt-20">
+      <div className="bg-primary/5 rounded-[40px] mt-20">
         <Testimonial
           author={{
             name: "Dr. Emily Carter",
