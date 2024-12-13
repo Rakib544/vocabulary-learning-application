@@ -11,18 +11,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useMutation from "@/hooks/use-mutation";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Pencil } from "lucide-react";
-import Image from "next/image";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-import userImage from "../images/user.webp";
-import { Label } from "./ui/label";
 
 const FormSchema = z
   .object({
@@ -46,26 +41,7 @@ const FormSchema = z
     path: ["confirmPassword"],
   });
 
-async function handleDeleteImageFromCloudinary(publicId: string) {
-  await fetch(
-    `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/destroy`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        public_id: publicId,
-        api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-        api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
-      }),
-    }
-  );
-}
-
 export default function SignUpForm() {
-  const [profile, setProfile] = useState<File | undefined | null>(null);
-  const [error, setError] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -73,31 +49,7 @@ export default function SignUpForm() {
 
   const router = useRouter();
 
-  async function handleImageUploadToCloudinary() {
-    const file = profile;
-    if (!file) return;
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append(
-      "upload_preset",
-      process.env.NEXT_PUBLIC_CLOUD_PRESET as string
-    );
-    formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUD_NAME as string);
-
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const result = await res.json();
-
-    return { publicId: result.public_id, url: result.secure_url };
-  }
-
   const mutationFunction = async (payload: FormValues) => {
-    const imageResult = await handleImageUploadToCloudinary();
     try {
       const { email, name, password } = payload;
 
@@ -112,7 +64,8 @@ export default function SignUpForm() {
             email,
             name,
             password,
-            photoUrl: imageResult?.url,
+            photoUrl:
+              "https://res.cloudinary.com/djb97hbxp/image/upload/v1734060920/user_qilkyv.webp",
           }),
         }
       );
@@ -124,7 +77,6 @@ export default function SignUpForm() {
       toast(result.message);
       router.push("/auth/signin");
     } catch (error: any) {
-      await handleDeleteImageFromCloudinary(imageResult?.publicId);
       toast(error.message);
     }
   };
@@ -140,47 +92,8 @@ export default function SignUpForm() {
     setError(false);
   }
 
-  const image = profile ? URL.createObjectURL(profile) : userImage;
-
   return (
     <div>
-      <div className="relative mx-auto flex h-[120px] w-[120px] justify-center mb-2">
-        <Image
-          src={image}
-          alt=""
-          width="120"
-          height="120"
-          className="rounded-full border-2"
-        />
-        <Label htmlFor="profile">
-          <button
-            type="button"
-            className="absolute bottom-3 right-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white"
-          >
-            <Pencil size="16" />
-          </button>
-        </Label>
-        <Input
-          type="file"
-          id="profile"
-          accept=".jpg, .jpeg, .webp, .png"
-          className="absolute inset-0 h-full opacity-0"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setProfile(event.target.files?.[0]);
-            setError(false);
-          }}
-        />
-      </div>
-
-      <p
-        className={cn(
-          error ? "text-red-500" : "text-white",
-          "text-center text-sm font-medium mb-2"
-        )}
-      >
-        Please upload profile picture
-      </p>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-4">
           <FormField
