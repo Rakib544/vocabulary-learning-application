@@ -93,7 +93,7 @@ export default function SignUpForm() {
     );
     const result = await res.json();
 
-    return { publicId: result.public_id, url: result.url };
+    return { publicId: result.public_id, url: result.secure_url };
   }
 
   const mutationFunction = async (payload: FormValues) => {
