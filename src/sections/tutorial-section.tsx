@@ -55,7 +55,7 @@ export default function TutorialSection({
         </div>
       </div>
       <div className="col-span-12 lg:col-span-4">
-        <ScrollArea className="h-[600px]">
+        <ScrollArea className="h-auto md:h-[600px]">
           <ul className="space-y-2">
             {tutorials.map((tutorial, index) => (
               <li

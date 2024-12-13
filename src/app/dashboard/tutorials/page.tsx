@@ -26,6 +26,7 @@ async function getTutorials(accessToken?: string): Promise<Tutorials[]> {
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      cache: "no-store",
     }
   );
   const result = await response.json();
@@ -62,7 +63,7 @@ export default async function DashboardTutorialsPage() {
       </div>
 
       {tutorials.length > 0 ? (
-        <ul className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <ul className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-6">
           {tutorials.map((tutorial) => (
             <li key={tutorial.id}>
               <TutorialCard

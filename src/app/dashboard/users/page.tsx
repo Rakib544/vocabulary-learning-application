@@ -19,6 +19,7 @@ async function getUsers(accessToken?: string): Promise<User[]> {
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      cache: "no-store",
     }
   );
   const result = await response.json();

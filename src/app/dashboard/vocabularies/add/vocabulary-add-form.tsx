@@ -87,7 +87,7 @@ export default function VocabularyAddForm({ lessons }: { lessons: Lesson[] }) {
     if (session?.user.email) {
       form.setValue("adminEmail", session?.user.email || "");
     }
-  }, [session?.user?.email]);
+  }, [form, session?.user.email]);
 
   return (
     <div className="max-w-xl mt-12">

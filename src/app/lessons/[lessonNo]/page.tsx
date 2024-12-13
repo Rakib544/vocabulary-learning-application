@@ -37,6 +37,7 @@ async function getLesson(
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      cache: "no-store",
     }
   );
 

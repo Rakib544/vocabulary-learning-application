@@ -26,6 +26,7 @@ export default async function LessonsPage() {
       headers: {
         authorization: `Bearer ${session?.user.accessToken}`,
       },
+      cache: "no-store",
     }
   );
 
@@ -43,9 +44,9 @@ export default async function LessonsPage() {
           </p>
         </PageIntro>
       </Container>
-      <div className="mt-24">
+      <div className="mt-12 md:mt-24">
         <Container>
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {lessons.map((lesson) => (
               <li
                 key={lesson.lessonNo}

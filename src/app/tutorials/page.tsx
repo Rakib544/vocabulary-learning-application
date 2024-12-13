@@ -16,6 +16,7 @@ async function getTutorials(accessToken?: string): Promise<Tutorials[]> {
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      cache: "no-store",
     }
   );
   const result = await response.json();

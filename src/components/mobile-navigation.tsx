@@ -1,4 +1,5 @@
 "use client";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { MobileNavIcon, TextUnderline } from "./icons";
@@ -124,6 +125,7 @@ const MobileNavigation: React.FC<{ navLinks: MobileNavigationProps[] }> = ({
   navLinks,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
 
   const handleClose = () => {
     setIsOpen(false);
@@ -155,14 +157,22 @@ const MobileNavigation: React.FC<{ navLinks: MobileNavigationProps[] }> = ({
                 <MobileNavigationItem link={link} onClose={handleClose} />
               </NavigationMenuItem>
             ))}
-            <li className="w-full">
-              <Link
-                href="/auth/signin"
-                className={buttonVariants({ className: "mt-4 w-full" })}
-              >
-                Sigin
-              </Link>
-            </li>
+            {session?.user ? (
+              <li className="w-full">
+                <Button className="w-full" onClick={() => signOut()}>
+                  Logout
+                </Button>
+              </li>
+            ) : (
+              <li className="w-full">
+                <Link
+                  href="/auth/signin"
+                  className={buttonVariants({ className: "mt-4 w-full" })}
+                >
+                  Sigin
+                </Link>
+              </li>
+            )}
           </NavigationMenuList>
         </NavigationMenu>
       </SheetContent>

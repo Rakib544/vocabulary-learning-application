@@ -50,7 +50,7 @@ export default function VocabulariesSection({
 
   return (
     <>
-      <div className="mt-20 p-20 rounded-2xl bg-primary/5 relative">
+      <div className="mt-20 p-6 md:12 lg:p-20 rounded-2xl bg-primary/5 relative">
         {showConfetti ? (
           <div className="h-[300px] flex justify-center items-center">
             <p className="text-xl font-bold">
@@ -59,7 +59,7 @@ export default function VocabulariesSection({
           </div>
         ) : (
           <>
-            <div className="absolute top-8 right-10">
+            <div className="absolute top-2 md:top-8 right-4 md:right-10">
               {currentItem + 1} of {vocabularies.length} vocabularies
             </div>
             <ul className="space-y-6">

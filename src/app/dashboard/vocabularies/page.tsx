@@ -55,6 +55,7 @@ async function getVocabularies(accessToken?: string): Promise<Vocabulary[]> {
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      cache: "no-store",
     }
   );
   const result = await response.json();

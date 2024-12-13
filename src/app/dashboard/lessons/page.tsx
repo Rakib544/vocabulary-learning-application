@@ -20,6 +20,7 @@ async function getLessons(accessToken?: string): Promise<Lesson[]> {
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      cache: "no-store",
     }
   );
   const result = await response.json();

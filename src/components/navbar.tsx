@@ -57,19 +57,19 @@ export default function Navbar({
                 </Link>
               </NavigationMenuItem>
             ))}
+            {name && photoUrl && email ? (
+              <UserNav name={name} email={email} photoUrl={photoUrl} />
+            ) : (
+              <Link
+                href="/auth/signin"
+                className={buttonVariants({
+                  className: "hidden lg:inline-flex ml-10",
+                })}
+              >
+                Signin
+              </Link>
+            )}
           </NavigationMenuList>
-          {name && photoUrl && email ? (
-            <UserNav name={name} email={email} photoUrl={photoUrl} />
-          ) : (
-            <Link
-              href="/auth/signin"
-              className={buttonVariants({
-                className: "hidden lg:inline-flex ml-10",
-              })}
-            >
-              Signin
-            </Link>
-          )}
         </NavigationMenu>
 
         <div className="lg:hidden">

@@ -27,6 +27,7 @@ async function getTutorial(
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      cache: "no-store",
     }
   );
   const result = await response.json();
