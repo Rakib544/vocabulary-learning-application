@@ -155,7 +155,7 @@ export default function SignUpForm() {
         <Label htmlFor="profile">
           <button
             type="button"
-            className="absolute bottom-3 right-1 flex h-10 w-10 items-center justify-center rounded-full bg-sky-500 text-white"
+            className="absolute bottom-3 right-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white"
           >
             <Pencil size="16" />
           </button>
