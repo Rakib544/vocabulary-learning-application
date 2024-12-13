@@ -64,8 +64,7 @@ export default function SignUpForm() {
             email,
             name,
             password,
-            photoUrl:
-              "https://res.cloudinary.com/djb97hbxp/image/upload/v1734060920/user_qilkyv.webp",
+            photoUrl: "",
           }),
         }
       );
