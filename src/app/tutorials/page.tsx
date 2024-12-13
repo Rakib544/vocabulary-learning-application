@@ -1,5 +1,6 @@
 import { Container } from "@/components/container";
 import { authOptions } from "@/lib/auth";
+import { MotionDiv } from "@/lib/framer-motion";
 import TutorialSection from "@/sections/tutorial-section";
 import { getServerSession } from "next-auth";
 
@@ -29,13 +30,19 @@ export default async function TutorialsPage() {
   return (
     <main>
       <Container>
-        {tutorials.length > 0 ? (
-          <TutorialSection tutorials={tutorials} />
-        ) : (
-          <div className="h-96 flex justify-center items-center">
-            No tutorials available
-          </div>
-        )}
+        <MotionDiv
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {tutorials.length > 0 ? (
+            <TutorialSection tutorials={tutorials} />
+          ) : (
+            <div className="h-96 flex justify-center items-center">
+              No tutorials available
+            </div>
+          )}
+        </MotionDiv>
       </Container>
     </main>
   );

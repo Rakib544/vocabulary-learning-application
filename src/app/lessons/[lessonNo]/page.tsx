@@ -58,20 +58,21 @@ export default async function LessonDetailsPage({
   return (
     <main>
       <Container>
-        <PageIntro pageTitle={lesson.name} />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem className="text-sm text-foreground font-medium">
-              <BreadcrumbLink asChild>
-                <Link href="/lessons">Lessons</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem className="text-sm text-foreground font-medium">
-              <BreadcrumbPage>Lesson - {lesson.lessonNo}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <PageIntro pageTitle={lesson.name}>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem className="text-sm text-foreground font-medium">
+                <BreadcrumbLink asChild>
+                  <Link href="/lessons">Lessons</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem className="text-sm text-foreground font-medium">
+                <BreadcrumbPage>Lesson - {lesson.lessonNo}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </PageIntro>
 
         <VocabulariesSection vocabularies={lesson.vocabularies} />
       </Container>

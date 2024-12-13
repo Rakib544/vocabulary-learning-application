@@ -2,6 +2,7 @@ import { Container } from "@/components/container";
 import { PageIntro } from "@/components/page-intro";
 import { Button } from "@/components/ui/button";
 import { authOptions } from "@/lib/auth";
+import { MotionLI, MotionUL } from "@/lib/framer-motion";
 import { ChevronRight } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
@@ -46,9 +47,20 @@ export default async function LessonsPage() {
       </Container>
       <div className="mt-12 md:mt-24">
         <Container>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <MotionUL
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.5,
+              ease: [0.25, 0.4, 0.4, 1],
+              delay: 0.2,
+              times: [0, 1],
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+          >
             {lessons.map((lesson) => (
-              <li
+              <MotionLI
                 key={lesson.lessonNo}
                 className="p-6 rounded-xl custom-shadow border border-slate-50 bg-white text-center"
               >
@@ -64,9 +76,9 @@ export default async function LessonsPage() {
                     <ChevronRight className="text-slate-600 size-5" />
                   </Button>
                 </Link>
-              </li>
+              </MotionLI>
             ))}
-          </ul>
+          </MotionUL>
         </Container>
       </div>
     </main>
