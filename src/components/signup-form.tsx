@@ -84,12 +84,7 @@ export default function SignUpForm() {
   const { isLoading, mutate } = useMutation(mutationFunction);
 
   async function onSubmit(data: FormValues) {
-    if (!profile) {
-      setError(true);
-      return;
-    }
     mutate({ ...data });
-    setError(false);
   }
 
   return (
