@@ -147,7 +147,7 @@ const MobileNavigation: React.FC<{ navLinks: MobileNavigationProps[] }> = ({
           href="/lessons"
           className="text-2xl font-extrabold text-primary relative inline-block ml-4"
         >
-          KanaBridge
+          SakuraLexis
           <TextUnderline />
         </Link>
         <NavigationMenu className="block max-w-none space-b-4">

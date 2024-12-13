@@ -42,7 +42,7 @@ export default function Navbar({
           href="/lessons"
           className="text-2xl font-extrabold text-primary relative"
         >
-          KanaBridge
+          SakuraLexis
           <TextUnderline />
         </Link>
 

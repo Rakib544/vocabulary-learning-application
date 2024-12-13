@@ -28,7 +28,7 @@ export default function SignIn() {
               href="/lessons"
               className="text-2xl font-extrabold text-primary relative mb-6 inline-block"
             >
-              KanaBridge
+              SakuraLexis
               <TextUnderline />
             </Link>
 
