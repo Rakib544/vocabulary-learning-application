@@ -25,7 +25,7 @@ const FormSchema = z
     email: z
       .string()
       .trim()
-      .min(1, { message: "Email is required" })
+      .min(1, { message: "Email is required." })
       .email("This is not a valid email"),
     password: z
       .string()
