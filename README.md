@@ -1,4 +1,4 @@
-# SakuraLexis - Your Path to Japanese Vocabulary Mastery
+# SakuraLexis - Your Path to Japanese Vocabulary Mastery.
 
 SakuraLexis is an intuitive and interactive platform designed to help users learn and master Japanese vocabulary. This repository contains the frontend implementation of SakuraLexis using **Next.js 14**, providing a user-friendly and efficient experience for both learners and administrators.
 
@@ -24,8 +24,8 @@ SakuraLexis is an intuitive and interactive platform designed to help users lear
 ## Tech Stack
 
 - **Framework**: [Next.js 14](https://nextjs.org/)
-- **Styling**: Tailwind CSS
-- **UI Enhancements**: Framer Motion
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Enhancements**: [Framer Motion](https://motion.dev/)
 
 ---
 
