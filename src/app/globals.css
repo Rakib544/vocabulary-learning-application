@@ -52,10 +52,3 @@
 .text-stroke {
   -webkit-text-stroke: 1px #4f46e5;
 }
-
-.gradient-border {
-  border-width: 1px;
-  border-style: solid;
-  /* Replace these colors with your desired gradient */
-  border-image: linear-gradient(to right, #4dc0b5, #3490dc);
-}
