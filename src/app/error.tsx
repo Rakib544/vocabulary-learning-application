@@ -17,7 +17,7 @@ export default function GlobalError({
         <FadeIn className="my-32 max-w-xl">
           <span className="text-6xl font-extrabold text-primary">500</span>
           <h1 className="text-2xl mt-3 mb-2 font-extrabold text-foreground">
-            Internal Server Error!
+            Internal Server Error
           </h1>
           <p className="text-muted-foreground">
             Sorry, The server encountered an temporary error and could not
